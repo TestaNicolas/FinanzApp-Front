@@ -1,0 +1,53 @@
+::ng-deep .p-card {
+    padding-inline: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    .p-card-body {
+        padding: 0px;
+    }
+
+    .p-card-content {
+        padding: 0;
+    }
+}
+
+::ng-deep .p-speeddial-button.p-button.p-button-icon-only {
+    width: 3rem;
+    height: 3rem;
+}
+
+::ng-deep .p-speeddial {
+    position: relative;
+}
+
+.dashboard-container {
+    border: 1px solid black;
+    display: flex;
+
+    .dashboard-item {
+        padding: 10px;
+
+        .finance-currency {
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .finance-value {
+            font-size: 30px;
+            font-weight: 500;
+        }
+    }
+}
+
+.info {
+    background-color: rgb(53 164 204 / 52%);
+    background: #9eade6;
+    color: #121212;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+}

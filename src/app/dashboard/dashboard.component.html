@@ -1,1 +1,84 @@
-<p>dashboard works!</p>
+<div class="grid justify-content-between align-items-center" style="margin-left: 130px; border: 1px solid rgba(255, 255, 255, 0.127);">
+    <div class="col-11 flex">
+        <div class="col-2 dashboard-item" *ngFor="let resumen of this.informationDashboard.resumen" >
+            <div class="flex info">
+                <div class="pr-3">
+                    <i class="pi pi-info-circle"></i>
+                </div>
+                <div>
+                    {{resumen.string}}: ${{resumen.value}}
+                </div>
+            </div>
+        </div>           
+    </div>
+    <div class="col-1">
+        <p-button label="Nuevo" [outlined]="true" icon="pi pi-plus" [rounded]="true" severity="secondary" (click)="showDialog()"/>
+    </div>
+</div>
+
+<div style="margin-left: 130px; margin-top:50px; border: 1px solid rgba(255, 255, 255, 0.127);">
+    <div class="grid grid-nogutter" class="dashboard-container">
+        <div class="col-3 dashboard-item" *ngFor="let finance of this.informationDashboard.finance" >
+            <p-card>
+                <!-- Header -->
+                <ng-template pTemplate="header">
+                    <div class="flex justify-content-between align-items-center">
+                        <div class="flex align-items-center">
+                            <h3 class="pr-3">{{finance.type}}</h3>
+                            <p-tag 
+                                [icon]="finance.invested ? 'pi pi-chart-line' : 'pi pi-info-circle'"
+                                [severity]="finance.invested ? 'success' : 'danger'" 
+                                [value]="finance.invested ? 'Invertido' : 'No invertido'" />
+                        </div>
+                        <div class="flex align-items-center">
+                            <p-menu #menu [model]="optionsCard" [popup]="true" />
+                            <p-button icon="pi pi-ellipsis-v" [rounded]="true" [text]="true" (click)="menu.toggle($event)" [severity]="finance.invested ? 'success' : 'danger'" />
+                        </div>
+                    </div>
+                </ng-template>
+                <!-- Content -->
+                <ng-template pTemplate="content" >
+                    <div class="flex align-items-center pt-2">
+                        <div class="finance-currency pr-2">$</div>
+                        <div class="finance-value">{{finance.value}}</div>
+                    </div>
+                </ng-template>
+                <!-- Footer -->
+                 <ng-template pTemplate="footer"/>
+            </p-card>
+        </div>   
+    </div>
+</div>
+
+<!--
+"value": 1000,
+"invested": true,
+"type": "Mercado Pago",
+"currency": "Dolar" 
+-->
+
+<p-dialog header="Nueva Card" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <div class="flex-column align-items-center gap-4 mb-4">
+        <label for="type" class="font-semibold w-24">Tipo</label>
+        <p-dropdown [options]="types" [(ngModel)]="selectedType" optionLabel="name" placeholder="Seleccionar el tipo" />
+    </div>
+    <div class="flex-column align-items-center gap-4 mb-4">
+        <label for="value" class="font-semibold w-24">Valor</label>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="value1" />
+    </div>
+    <div class="flex-column align-items-center justify-content-center gap-4 mb-4">
+        <div class="flex flex-column gap-2">
+            <div *ngFor="let category of categories" class="field-checkbox">
+                <p-checkbox 
+                    [(ngModel)]="selectedCategories"
+                    [label]="category.name"
+                    name="group"
+                    [value]="category" />
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-content-around">
+        <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+        <p-button label="Save" (click)="visible = false" />
+    </div>
+</p-dialog>
