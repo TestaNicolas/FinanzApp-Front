@@ -1,141 +1,53 @@
-import { NgFor, NgForOf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CardModule } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
-import { MenuItem } from 'primeng/api';
-import { MenuModule } from 'primeng/menu';
-import { ButtonModule } from 'primeng/button';
-import { TabMenuModule } from 'primeng/tabmenu';
-import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { CheckboxModule } from 'primeng/checkbox';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CardModule, NgFor, TagModule, MenuModule, ButtonModule, TabMenuModule, DialogModule, DropdownModule, FormsModule, InputNumberModule, CheckboxModule],
+  imports: [CardComponent, NgFor],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 
 export class DashboardComponent implements OnInit {
-  optionsCard: MenuItem[] | undefined;
-  visible: boolean = false;
-  informationDashboard: any;
-  types: any;
-  selectedType: any;
-  value1: number = 42723;
-  selectedCategories: any[] = [];
-
-  categories: any[] = [
-      { name: 'Esta invertido', key: 'A' },
-      { name: 'Es dolar', key: 'M' },
-  ];
+  items: any[] = [];
 
   constructor () {}
 
-  ngOnInit() {
-    this.optionsCard = 
+  async ngOnInit() {
+    await this.loadCards()
+  }
+
+  showOverlay(event: PointerEvent): void {
+    console.log(event);
+  }
+
+  async loadCards(): Promise<void> {
+    this.items = 
     [
       {
-          label: 'Opciones',
-          items: [
-              {
-                  label: 'Editar',
-                  icon: 'pi pi-pencil'
-              },
-              {
-                  label: 'Eliminar',
-                  icon: 'pi pi-trash'
-              }
-          ]
+        title: "Mercado Pago",
+        price: 1000,
+        description: "+1.5 from last week",
+        color: "#2abcff",
+        icon: '/mercado-pago.svg'
+      },
+        {
+        title: "Santander",
+        price: 2000,
+        description: "+2.5 from last wee",
+        color: "#ec0000",
+        icon: '/santander.svg'
+      },
+        {
+        title: "Brubank",
+        price: 3000,
+        description: "+3.5 from last week",
+        color: "#624bd9",
+        icon: '/brubank.webp'
       }
     ];
-    this.loadInformationDashboard();
-    this.loadTypes();
-  }
-
-  showDialog() {
-    this.visible = true;
-  }
-
-  loadInformationDashboard() {
-    this.informationDashboard = {
-      "resumen": [
-        {
-          "string": "Total Finanzas",
-          "value": 10000
-        },
-        {
-          "string": "Total Invertido",
-          "value": 5000
-        },
-        {
-          "string": "Total No Invertido",
-          "value": 5000
-        },
-      ],
-      "finance": [
-        {
-          "value": 1000,
-          "invested": true,
-          "type": "Mercado Pago",
-          "currency": "Dolar"
-        },
-        {
-          "value": 1000,
-          "invested": false,
-          "type": "Santander",
-          "currency": "Peso Argentino"
-        },
-        {
-          "value": 1000,
-          "invested": false,
-          "type": "Santander",
-          "currency": "Peso Argentino"
-        },
-        {
-          "value": 1000,
-          "invested": false,
-          "type": "Santander",
-          "currency": "Peso Argentino"
-        },
-        {
-          "value": 1000,
-          "invested": true,
-          "type": "Mercado Pago",
-          "currency": "Dolar"
-        },
-        {
-          "value": 1000,
-          "invested": false,
-          "type": "Santander",
-          "currency": "Peso Argentino"
-        },
-        {
-          "value": 1000,
-          "invested": false,
-          "type": "Santander",
-          "currency": "Peso Argentino"
-        },
-              {
-          "value": 1000,
-          "invested": false,
-          "type": "Santander",
-          "currency": "Peso Argentino"
-        }
-      ]
-    };
-  }
-
-  loadTypes() {
-    this.types = [
-      { name: 'Mercado Pago', code: 'MP' },
-      { name: 'Santander', code: 'SA' },
-      { name: 'Plazo Fijo', code: 'PF' }
-  ];
   }
 
 }

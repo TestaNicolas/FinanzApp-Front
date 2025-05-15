@@ -1,0 +1,33 @@
+.container {
+  border: 1px solid #0ec7e417;
+  border-left: 3px solid var(--main-color);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.price {
+  color: var(--main-color);
+  font-size: 2rem;
+}
+
+.container-info {
+  color: #a7a6a9;
+  // border: 1px solid #fdfdfd12;
+}
+
+.container-icon {
+  display: flex;
+  justify-content: center;
+  // border: 1px solid #fdfdfd12;
+}
+
+.icon {
+  background-color: var(--main-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
