@@ -1,0 +1,33 @@
+<div class="container-dashboard p-5">
+    <!-- container-cards -->
+    <div class="container-cards grid grid-nogutter">
+        <div class="col-12 sm:col-6 lg:col-4" *ngFor="let item of infoCards; let i = index" (click)="showOverlay(item)" >
+            <app-card 
+                [titulo]="item.title" 
+                [price]="item.price" 
+                [description]="item.description" 
+                [color]="item.color" 
+                [icon]="item.icon" />
+        </div> 
+    </div>
+    <!-- container-resume -->
+    <div class="container-resume grid grid-nogutter">
+        <div class="col-12 sm:col-12 lg:col-7" style="padding: 50px;">
+            <div style="height: 400px;">
+                <app-chart 
+                    [type]="infoChartBar.type"
+                    [data]="infoChartBar.data"
+                    [options]="infoChartBar.options"  />
+            </div>
+        </div>
+        <div class="col-12 sm:col-12 lg:col-4" style="padding: 50px;">
+            <div style="height: 400px;">
+                <app-chart 
+                    [type]="infoChartPie.type"
+                    [data]="infoChartPie.data"
+                    [options]="infoChartPie.options"  />
+            </div>
+        </div>
+    </div>
+</div>
+
